@@ -185,7 +185,9 @@ int RepairBig(int & ite, Struc_Sol *C,  int th){
 			if(C->cbnodes[i]>=cb) CV[i]=1;
 			else CV[i]=0;
 		}
-		for(i=0;i<num_wc;i++) oldwc[i]=C->wc[i];
+//		for(i=0;i<num_wc;i++) oldwc[i]=C->wc[i];
+		for(i=0;i<num_wc;i++) oldwc[i]=num_edge;
+
 		for(i=0;i<num_vex;i++){
 			if(CV[i]==0) continue;
 			if(time_check()) return 0;
@@ -220,6 +222,7 @@ int RepairBig(int & ite, Struc_Sol *C,  int th){
 			ite++;
 			if(numI!=0){
 				temp=rand()%numI;
+				temp=0;
 				get_swap(C,CandiList[temp][0],CandiList[temp][1]);
 				update_TL(CandiList[temp][0],CandiList[temp][1],ite);
 			}
@@ -455,13 +458,13 @@ int descent_biggraph(Struc_Sol *C, Struc_Sol* LB, int &ite, int th){
 	int numcandi __attribute__ ((unused));
 	CopySolution(C,lb_local);
 
-	while(count<30000){
+	while(count<L1){
 
 		if(time_check()) return 0;
 
-
-		if(flag==1)	numcandi=RepairBig(ite,C,0);
-		else Compromise_move(C,LB,ite);
+		numcandi=RepairBig(ite,C,0);
+		// if(flag==1)	numcandi=RepairBig(ite,C,0);
+		// else Compromise_move(C,LB,ite);
 																			//numI==0, numN==0
 		/*******choose the next Nx************/
 		if(flag==1) flag=2;
@@ -567,8 +570,8 @@ void SSearch(Struc_Sol *C){
 //			newDescent(C,LBS,ite,0);
 //			modified_descent(C,LBS,ite,0);
 //			descent_discuss(C,LBS,ite,0);
-			descent_upgrade(C,LBS,ite,0);
-//			descent_biggraph(C,LBS,ite,0);
+//			descent_upgrade(C,LBS,ite,0);
+			descent_biggraph(C,LBS,ite,0);
 
 			if(checkbest()) return;
 			if(time_check()) return;

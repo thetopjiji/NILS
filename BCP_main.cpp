@@ -248,7 +248,7 @@ int **get_matrix(int num_row,int num_col){
 
 int parameters(int count, char *arguments[])  {
 	char *temp, filename[80] = "no";
-	char *nf=filename;
+//	char *nf=filename;
 //	char *wewant=filename;
 //	char *token;
 
@@ -256,7 +256,7 @@ int parameters(int count, char *arguments[])  {
 
 	strcpy(resultsFile, filename);
 	strcpy(benchmark, filename);
-	strcpy(nf, filename);
+//	strcpy(nf, filename);
 
 	while (count != 1) {
 		temp = arguments[count - 2];
@@ -284,7 +284,7 @@ int parameters(int count, char *arguments[])  {
 		printf("enter error\n");
 		exit(-1);
 	}
-	strcpy(nf, benchmark);
+//	strcpy(nf, benchmark);
 
 //	token=strtok(nf,"/");
 //	while(token!=NULL){
